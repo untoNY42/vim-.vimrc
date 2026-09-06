@@ -1,0 +1,50 @@
+" --- 1. ОСНОВНЫЕ НАСТРОЙКИ ---
+syntax on                    " Включить подсветку синтаксиса
+set number                   " Показывать номера строк
+set mouse=r                  " Вставка из буфера кликом колесика мыши
+set tabstop=4                " Табуляция в 4 пробела
+set shiftwidth=4             " Автоотступ в 4 пробела
+set expandtab                " Табы в пробелы
+set smartindent              " Умные отступы для Си
+
+" --- 2. ГЛУБОКИЙ ТЕМНЫЙ ФОН С КАРТИНКИ ---
+set termguicolors            " Поддержка TrueColor
+set background=dark
+
+colorscheme industry         " Базовая тема
+
+" Устанавливаем точный темный фон из вашего скриншота (#141414)
+highlight Normal guibg=#141414 guifg=#d4d4d4 ctermbg=none
+highlight LineNr guibg=#141414 guifg=#555555
+highlight SignColumn guibg=#141414
+highlight VertSplit guibg=#141414 guifg=#2d2d2d
+
+" Подсветка текущей строки (серая полоса, как на строке со *zp = edi)
+set cursorline
+highlight CursorLine guibg=#222222
+
+" --- 3. ПОДСВЕТКА СИНТАКСИСА (ФИОЛЕТОВЫЙ + ОРАНЖЕВЫЙ) ---
+
+" Ключевые слова, типы и препроцессор (void, int, return, #include) -> Фиолетово-Розовый
+highlight Statement guifg=#c586c0 gui=none
+highlight Type guifg=#c586c0 gui=none
+highlight PreProc guifg=#c586c0 gui=none
+
+" Операторы (+, -, *, /, =) -> Чистый белый
+highlight Operator guifg=#ffffff
+
+" Имена функций (decode2, main) -> Персиково-Оранжевый
+highlight Function guifg=#ff9c6e gui=none
+
+" Числа (0) -> Бирюзово-голубой
+highlight Number guifg=#4ec9b0
+
+" --- 4. ПЕРЕМЕННЫЕ И СКОБКИ КАК НА ФОТО ---
+
+" Все переменные (xp, yp, zp, edi, edx, eax) -> Тоже Персиково-Оранжевые
+autocmd FileType c,cpp syntax match CVariable "\<[a-zA-Z_][a-zA-Z0-9_]*\>" containedin=ALLBUT,Statement,Operator,Function,Type,String,Comment,PreProc
+highlight CVariable guifg=#ff9c6e gui=none
+
+" Скобки {} () [] -> Желто-Оранжевые
+autocmd FileType c,cpp syntax match CBraces "[(){}\[\]]"
+highlight CBraces guifg=#ffd700 gui=none

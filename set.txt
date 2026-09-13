@@ -1,5 +1,21 @@
-" --- 1. ОСНОВНЫЕ НАСТРОЙКИ ---
-syntax on                    " Включить подсветку синтаксиса
+" Основные настройки
+set nocompatible
+filetype off
+
+set tabstop=4       " Ширина таба по умолчанию (в пробелах)
+set shiftwidth=4    " Размер отступа при командах форматирования (<< и >>)
+set softtabstop=4   " Сколько пробелов вставлять при нажатии TAB
+set expandtab
+
+" Использовать TAB для автодополнения, если перед курсором есть символ
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : v:shell_error == 0 && col('.') > 1 && getline('.')[col('.') - 2] =~ '\s' ? "\<TAB>" : "\<C-n>"
+
+" Использовать Shift+TAB для листания списка автодополнения назад
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Установка vim-plug
+call plug#begin('~/.vim/plugged')
+
 set number                   " Показывать номера строк
 set mouse=r                  " Вставка из буфера кликом колесика мыши
 set tabstop=4                " Табуляция в 4 пробела
@@ -48,3 +64,4 @@ highlight CVariable guifg=#ff9c6e gui=none
 " Скобки {} () [] -> Желто-Оранжевые
 autocmd FileType c,cpp syntax match CBraces "[(){}\[\]]"
 highlight CBraces guifg=#ffd700 gui=none
+
